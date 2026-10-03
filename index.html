@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Grammar Practice | Gerunds & To-Infinitives</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background: #0a0c12;
+            font-family: 'Segoe UI', 'Inter', 'Noto Sans', system-ui, -apple-system, monospace;
+            color: #e3e6f0;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quiz-container {
+            max-width: 1200px;
+            width: 100%;
+            background: #11161f;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(66, 153, 225, 0.2);
+            overflow: hidden;
+        }
+
+        .quiz-header {
+            background: #0f131c;
+            padding: 1.2rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid #2a313e;
+        }
+
+        .title-section h1 {
+            font-size: 1.65rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #7dd3fc, #38bdf8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .title-section p {
+            font-size: 0.85rem;
+            color: #8f9bb3;
+            margin-top: 4px;
+        }
+
+        .stats-box {
+            background: #010409;
+            padding: 0.5rem 1.4rem;
+            border-radius: 60px;
+            border: 1px solid #2d3a4e;
+            font-weight: 700;
+            font-size: 1.1rem;
+            font-family: monospace;
+            letter-spacing: 1px;
+            color: #facc15;
+            box-shadow: 0 0 6px rgba(250, 204, 21, 0.3);
+        }
+
+        .stats-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7e8aa8;
+            text-align: right;
+            margin-bottom: 4px;
+        }
+
+        .warning-bar {
+            background: #2c1a1f;
+            border-left: 6px solid #f97316;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.85rem;
+            color: #ffbc7a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #33222a;
+        }
+
+        .warning-count {
+            background: #00000066;
+            border-radius: 40px;
+            padding: 0.2rem 0.8rem;
+            font-weight: bold;
+            color: #ffaa66;
+        }
+
+        .questions-area {
+            padding: 1.8rem 2rem;
+            max-height: 70vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        .question-card {
+            background: #0e121b;
+            margin-bottom: 1.2rem;
+            border-radius: 1.2rem;
+            padding: 1rem 1.5rem;
+            border: 1px solid #232a35;
+            transition: all 0.1s;
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 0.85rem;
+            font-size: 1.05rem;
+            display: flex;
+            gap: 12px;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .q-num {
+            background: #1f2a3a;
+            border-radius: 30px;
+            padding: 0.1rem 0.7rem;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+
+        .target-text {
+            font-family: 'Courier New', monospace;
+            font-size: 1.05rem;
+            font-weight: 500;
+            background: #1a2a3a;
+            padding: 0.2rem 0.9rem;
+            border-radius: 28px;
+            letter-spacing: 0.5px;
+            color: #b8d4f0;
+            white-space: pre-wrap;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.6rem;
+        }
+
+        .option-radio {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #1a1f2b;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            border: 1px solid #2a3342;
+            transition: 0.05s linear;
+        }
+
+        .option-radio.selected {
+            background: #1a3a5a;
+            border-color: #38bdf8;
+        }
+
+        input[type="radio"] {
+            accent-color: #38bdf8;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        label {
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 500;
+        }
+
+        .submit-section {
+            padding: 1.2rem 2rem 2rem;
+            background: #0c1019;
+            border-top: 1px solid #232a35;
+            display: flex;
+            justify-content: center;
+        }
+
+        .submit-btn {
+            background: #1a4b6b;
+            border: none;
+            padding: 0.9rem 2.8rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .submit-btn:hover {
+            background: #2a6b8b;
+            transform: scale(0.98);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.2s;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-card {
+            background: #121826;
+            width: 90%;
+            max-width: 850px;
+            max-height: 85vh;
+            border-radius: 1.8rem;
+            border: 1px solid #2f3b54;
+            overflow-y: auto;
+            padding: 1.6rem;
+            box-shadow: 0 25px 40px black;
+        }
+
+        .modal-card h2 {
+            margin-bottom: 1rem;
+            color: #dddfff;
+        }
+
+        .summary-item {
+            border-bottom: 1px solid #2a3240;
+            padding: 0.8rem 0;
+            font-size: 0.9rem;
+        }
+
+        .correct-ans {
+            color: #6fcf97;
+        }
+
+        .wrong-ans {
+            color: #f5a97f;
+        }
+
+        .close-modal {
+            background: #2e3b4e;
+            border: none;
+            padding: 0.6rem 1.6rem;
+            border-radius: 40px;
+            color: white;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1a4b6b;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container" id="quizApp">
+    <div class="quiz-header">
+        <div class="title-section">
+            <h1>📘 Grammar Practice → Gerunds & To-Infinitives</h1>
+            <p>100 questions: Multiple choice | Score = Correct × 1</p>
+        </div>
+        <div>
+            <div class="stats-label">📊 PROGRESS</div>
+            <div class="stats-box" id="progressDisplay">0 / 100</div>
+        </div>
+    </div>
+
+    <div class="warning-bar" id="warningBar">
+        ⚠️ Anti-cheat active: switching tabs/windows will be logged. 
+        <span id="warningCounterSpan">⚠️ Warning 0 / 2</span>
+        <span style="margin-left: auto; font-size:0.7rem;">🚫 split-screen & screenshot protected</span>
+    </div>
+
+    <div class="questions-area" id="questionsContainer"></div>
+
+    <div class="submit-section">
+        <button class="submit-btn" id="submitQuizBtn">✍️ SUBMIT TEST</button>
+    </div>
+</div>
+
+<div id="resultModal" class="modal-overlay">
+    <div class="modal-card">
+        <h2>📋 Submission Summary (Grammar Practice)</h2>
+        <div id="modalContent"></div>
+        <button class="close-modal" id="closeModalBtn">Close Summary</button>
+    </div>
+</div>
+
+<script>
+    // --------------------------------------------------------------
+    // DATA from "GERUND & TO-INFINITIVE PRACTICE.docx"
+    // 100 questions with 4 options each
+    // Based on Answer Key provided in the file
+    // --------------------------------------------------------------
+    const RAW_QUESTIONS = [
+        { prompt: "What is a gerund?", options: ["A past-tense verb used as an adjective", "An -ing form of a verb functioning as a noun", "A verb preceded by to", "A noun followed by a verb"], correct: "An -ing form of a verb functioning as a noun" },
+        { prompt: "Which word is a gerund?", options: ["swimming", "swam", "swims", "to swim"], correct: "swimming" },
+        { prompt: "What is the basic form of a to-infinitive?", options: ["to + base verb", "to + -ing form", "to + past tense", "to + noun"], correct: "to + base verb" },
+        { prompt: "Which is a to-infinitive?", options: ["studying", "studied", "studies", "to study"], correct: "to study" },
+        { prompt: "In which sentence does reading function as a gerund?", options: ["The reading student smiled.", "She is reading now.", "Reading improves vocabulary.", "She was reading a book."], correct: "Reading improves vocabulary." },
+        { prompt: "In the sentence below, what is to travel? I want to travel.", options: ["A gerund", "A to-infinitive", "A finite verb", "A preposition"], correct: "A to-infinitive" },
+        { prompt: "Which sentence contains a gerund as the subject?", options: ["I enjoy swimming.", "Swimming is good exercise.", "I am swimming.", "I want to swim."], correct: "Swimming is good exercise." },
+        { prompt: "Which sentence contains a to-infinitive as the object of a verb?", options: ["I enjoy swimming.", "I swim every day.", "I want to swim.", "Swimming is fun."], correct: "I want to swim." },
+        { prompt: "Which form is used in the expression \"She is ___\"?", options: ["to study", "studying", "study", "studied"], correct: "studying" },
+        { prompt: "Which sentence uses cooking as a verb rather than as a gerund?", options: ["Cooking is relaxing.", "I enjoy cooking.", "Cooking takes time.", "She is cooking dinner."], correct: "She is cooking dinner." },
+        { prompt: "Which sentence uses to read as a noun-like infinitive phrase?", options: ["She reads every night.", "She is reading.", "To read widely is useful.", "She read the book."], correct: "To read widely is useful." },
+        { prompt: "Which sentence contains a gerund phrase?", options: ["She wants to leave.", "Running every morning helps me relax.", "She runs every morning.", "She is running now."], correct: "Running every morning helps me relax." },
+        { prompt: "Which sentence contains a to-infinitive phrase?", options: ["To learn another language takes time.", "Learning another language takes time.", "She learns languages.", "She learned Korean."], correct: "To learn another language takes time." },
+        { prompt: "Both gerunds and to-infinitives can function as:", options: ["nouns", "conjunctions", "articles", "prepositions"], correct: "nouns" },
+        { prompt: "Which pair is grammatically parallel?", options: ["swimming and to run", "to swim and running", "swimming and running", "swim and to running"], correct: "swimming and running" },
+        { prompt: "In the sentence below, what is the grammatical function of Swimming? Swimming is my favorite exercise.", options: ["Object", "Subject", "Adjective", "Adverb"], correct: "Subject" },
+        { prompt: "Which sentence uses a gerund as an object?", options: ["Dancing is difficult.", "I enjoy dancing.", "Dancing is healthy.", "Dancing every day helps."], correct: "I enjoy dancing." },
+        { prompt: "Which sentence contains a gerund after a preposition?", options: ["I want to leave.", "She is happy to leave.", "He left without saying goodbye.", "They decided to leave."], correct: "He left without saying goodbye." },
+        { prompt: "After a preposition, the verb normally takes:", options: ["the gerund form", "the base form", "the past form", "the to-infinitive"], correct: "the gerund form" },
+        { prompt: "Which is correct?", options: ["She is interested in to learn English.", "She is interested in learning English.", "She is interested in learn English.", "She is interested learning English."], correct: "She is interested in learning English." },
+        { prompt: "Which sentence is correct?", options: ["He left without say goodbye.", "He left without to say goodbye.", "He left without saying goodbye.", "He left without said goodbye."], correct: "He left without saying goodbye." },
+        { prompt: "In the sentence below, studying functions as: Studying English requires practice.", options: ["Subject", "Object", "Adjective", "Main verb"], correct: "Subject" },
+        { prompt: "Which sentence contains a gerund phrase functioning as the subject?", options: ["She enjoys reading novels.", "Reading novels improves vocabulary.", "She reads novels.", "She is reading novels."], correct: "Reading novels improves vocabulary." },
+        { prompt: "Which sentence contains a gerund functioning as the object of a preposition?", options: ["She is good at painting.", "She wants to paint.", "She paints well.", "She will paint tomorrow."], correct: "She is good at painting." },
+        { prompt: "Which sentence is grammatically correct?", options: ["He is afraid of to fly.", "He is afraid flying.", "He is afraid of flying.", "He is afraid fly."], correct: "He is afraid of flying." },
+        { prompt: "When a gerund phrase functions as the subject, it is normally treated as:", options: ["plural", "singular", "a conjunction", "an adjective"], correct: "singular" },
+        { prompt: "Which sentence is correct?", options: ["Swimming are fun.", "Swimming is fun.", "Swimming were fun.", "Swimming be fun."], correct: "Swimming is fun." },
+        { prompt: "Which sentence has correct subject-verb agreement?", options: ["Learning languages require patience.", "Learning languages requires patience.", "Learning languages requiring patience.", "Learning languages are require patience."], correct: "Learning languages requires patience." },
+        { prompt: "Why is is correct in this sentence? Reading books is enjoyable.", options: ["Books is the subject.", "Reading books functions as one singular subject.", "Gerunds always require is regardless of context.", "Reading is an adjective."], correct: "Reading books functions as one singular subject." },
+        { prompt: "Choose the correct verb: Exercising regularly ___ important.", options: ["are", "were", "be", "is"], correct: "is" },
+        { prompt: "Choose the correct verb: Studying late at night ___ difficult for me.", options: ["are", "is", "have", "were"], correct: "is" },
+        { prompt: "Which sentence is correct?", options: ["Eating vegetables and exercising regularly is good for your health.", "Eating vegetables and exercising regularly are good for your health.", "Eating vegetables and exercising regularly be good for your health.", "Eating vegetables and exercising regularly have good for your health."], correct: "Eating vegetables and exercising regularly is good for your health." },
+        { prompt: "In the sentence below, what is the subject? Learning a new language takes time.", options: ["language", "new", "Learning a new language", "time"], correct: "Learning a new language" },
+        { prompt: "Which sentence correctly treats a gerund phrase as singular?", options: ["Working from home save time.", "Working from home saves time.", "Working from home saving time.", "Working from home have saved time."], correct: "Working from home saves time." },
+        { prompt: "Choose the correct form: Traveling alone ___ me more independent.", options: ["make", "making", "makes", "are making"], correct: "makes" },
+        { prompt: "Which verb is commonly followed by a gerund?", options: ["enjoy", "decide", "hope", "promise"], correct: "enjoy" },
+        { prompt: "Choose the correct sentence.", options: ["I enjoy to read.", "I enjoy reading.", "I enjoy read.", "I enjoy to reading."], correct: "I enjoy reading." },
+        { prompt: "Which verb is commonly followed by a gerund?", options: ["avoid", "want", "plan", "expect"], correct: "avoid" },
+        { prompt: "Choose the correct form: She avoided ___ about the problem.", options: ["to talk", "talk", "talking", "talked"], correct: "talking" },
+        { prompt: "Which verb is commonly followed by a gerund?", options: ["finish", "decide", "agree", "promise"], correct: "finish" },
+        { prompt: "Choose the correct sentence.", options: ["He finished to work at six.", "He finished working at six.", "He finished work to.", "He finished work to doing."], correct: "He finished working at six." },
+        { prompt: "Which verb is commonly followed by a gerund?", options: ["suggest", "want", "need", "refuse"], correct: "suggest" },
+        { prompt: "Choose the correct sentence.", options: ["She suggested to take a taxi.", "She suggested taking a taxi.", "She suggested take a taxi.", "She suggested to taking a taxi."], correct: "She suggested taking a taxi." },
+        { prompt: "Which verb is commonly followed by a gerund?", options: ["mind", "want", "decide", "hope"], correct: "mind" },
+        { prompt: "Choose the correct sentence.", options: ["Would you mind to open the window?", "Would you mind open the window?", "Would you mind opening the window?", "Would you mind to opening the window?"], correct: "Would you mind opening the window?" },
+        { prompt: "Which expression requires a gerund?", options: ["look forward to", "want to", "decide to", "hope to"], correct: "look forward to" },
+        { prompt: "Choose the correct sentence.", options: ["I look forward to meet you.", "I look forward meeting you.", "I look forward to meeting you.", "I look forward to met you."], correct: "I look forward to meeting you." },
+        { prompt: "Which phrase is followed by a gerund?", options: ["be interested in", "decide to", "want to", "plan to"], correct: "be interested in" },
+        { prompt: "Choose the correct sentence.", options: ["She is interested in learn Korean.", "She is interested in learning Korean.", "She is interested to learning Korean.", "She is interested in to learn Korean."], correct: "She is interested in learning Korean." },
+        { prompt: "Which sentence is correct?", options: ["He is good at to cook.", "He is good at cook.", "He is good at cooking.", "He is good cooking to."], correct: "He is good at cooking." },
+        { prompt: "Which verb is commonly followed by a to-infinitive?", options: ["enjoy", "avoid", "decide", "finish"], correct: "decide" },
+        { prompt: "Choose the correct sentence.", options: ["She decided going home.", "She decided to go home.", "She decided go home.", "She decided to going home."], correct: "She decided to go home." },
+        { prompt: "Which verb is commonly followed by a to-infinitive?", options: ["want", "enjoy", "avoid", "suggest"], correct: "want" },
+        { prompt: "Choose the correct form: I want ___ a new language.", options: ["learning", "learned", "to learn", "learn"], correct: "to learn" },
+        { prompt: "Which verb is commonly followed by a to-infinitive?", options: ["hope", "mind", "finish", "avoid"], correct: "hope" },
+        { prompt: "Choose the correct sentence.", options: ["We hope seeing you soon.", "We hope to see you soon.", "We hope see you soon.", "We hope to seeing you soon."], correct: "We hope to see you soon." },
+        { prompt: "Which verb is commonly followed by a to-infinitive?", options: ["promise", "enjoy", "consider", "avoid"], correct: "promise" },
+        { prompt: "Choose the correct form: He promised ___ me.", options: ["helping", "helped", "help", "to help"], correct: "to help" },
+        { prompt: "Which verb is commonly followed by a to-infinitive?", options: ["refuse", "suggest", "admit", "practice"], correct: "refuse" },
+        { prompt: "Choose the correct sentence.", options: ["She refused helping him.", "She refused to help him.", "She refused help him.", "She refused to helping him."], correct: "She refused to help him." },
+        { prompt: "Which verb can commonly be followed by either a gerund or a to-infinitive with little or no change in meaning?", options: ["begin", "avoid", "refuse", "suggest"], correct: "begin" },
+        { prompt: "Which pair is generally acceptable?", options: ["She began to cry / She began crying.", "She avoided to cry / She avoided crying.", "She suggested to cry / She suggested crying.", "She refused crying / She refused to crying."], correct: "She began to cry / She began crying." },
+        { prompt: "Which verb commonly allows both forms?", options: ["start", "finish", "deny", "admit"], correct: "start" },
+        { prompt: "Choose the grammatically correct pair.", options: ["I started to study / I started studying.", "I started study / I started to studying.", "I started studied / I started studying to.", "I started to study / I started to studying."], correct: "I started to study / I started studying." },
+        { prompt: "Which verb commonly allows both to + verb and verb-ing?", options: ["continue", "avoid", "deny", "recommend"], correct: "continue" },
+        { prompt: "Which sentence is correct?", options: ["She continued to work.", "She continued working.", "Both A and B", "Neither A nor B"], correct: "Both A and B" },
+        { prompt: "Which verb is generally followed by a gerund rather than a to-infinitive?", options: ["consider", "decide", "hope", "promise"], correct: "consider" },
+        { prompt: "Which verb is generally followed by a to-infinitive rather than a gerund?", options: ["enjoy", "avoid", "hope", "finish"], correct: "hope" },
+        { prompt: "Which combination is correct?", options: ["enjoy to swim", "decide swimming", "avoid to study", "hope to win"], correct: "hope to win" },
+        { prompt: "Which combination is correct?", options: ["suggest going", "promise going", "refuse helping", "enjoy to read"], correct: "suggest going" },
+        { prompt: "What is the difference between: I stopped smoking. I stopped to smoke.", options: ["Both have exactly the same meaning.", "The first means quit smoking; the second means paused another activity in order to smoke.", "The first means started smoking; the second means quit smoking.", "Both mean that smoking continued."], correct: "The first means quit smoking; the second means paused another activity in order to smoke." },
+        { prompt: "Which sentence means \"I quit the activity\"?", options: ["I stopped to study.", "I stopped studying.", "I stopped in order to study.", "I stopped for studying."], correct: "I stopped studying." },
+        { prompt: "Which sentence means \"I paused another activity because I wanted to study\"?", options: ["I stopped studying.", "I stopped to study.", "I stopped for studying.", "I stopped study."], correct: "I stopped to study." },
+        { prompt: "What does remember doing something usually mean?", options: ["Remember a future obligation", "Recall a past action", "Forget an action", "Plan an action"], correct: "Recall a past action" },
+        { prompt: "What does remember to do something usually mean?", options: ["Recall something that happened", "Remember a task that needs to be done", "Regret something in the past", "Avoid an activity"], correct: "Remember a task that needs to be done" },
+        { prompt: "Which sentence means that the speaker recalled a past action?", options: ["I remembered to call her.", "I remembered calling her.", "I remembered call her.", "I remembered to calling her."], correct: "I remembered calling her." },
+        { prompt: "Which sentence means that the speaker did not forget to make the call?", options: ["I remembered calling her.", "I remembered to call her.", "I remembered call her.", "I remembered to calling her."], correct: "I remembered to call her." },
+        { prompt: "What does try doing something generally suggest?", options: ["Experimenting with a method to solve a problem", "Making a future promise", "Refusing to do something", "Recalling a past action"], correct: "Experimenting with a method to solve a problem" },
+        { prompt: "What does try to do something generally mean?", options: ["Experiment with an alternative", "Make an effort to accomplish something", "Remember a previous action", "Stop an activity"], correct: "Make an effort to accomplish something" },
+        { prompt: "Which sentence means \"experiment with this method\"?", options: ["Try to restart the computer.", "Try restarting the computer.", "Try restart the computer.", "Try to restarting the computer."], correct: "Try restarting the computer." },
+        { prompt: "Which sentence uses a to-infinitive to express purpose?", options: ["I went to the store to buy milk.", "I enjoy buying milk.", "Buying milk is easy.", "I avoided buying milk."], correct: "I went to the store to buy milk." },
+        { prompt: "In the sentence below, what does to buy milk express? She went to the store to buy milk.", options: ["Time", "Purpose", "Contrast", "Condition"], correct: "Purpose" },
+        { prompt: "Which sentence uses a to-infinitive after an adjective?", options: ["I am happy to help.", "I enjoy helping.", "Helping is useful.", "I avoid helping."], correct: "I am happy to help." },
+        { prompt: "Which sentence is correct?", options: ["It is difficult learning this language.", "It is difficult to learn this language.", "It is difficult learn this language.", "It is difficult to learning this language."], correct: "It is difficult to learn this language." },
+        { prompt: "Which sentence contains a to-infinitive expressing purpose?", options: ["He studies hard to pass the exam.", "He enjoys studying.", "Studying is important.", "He avoids studying."], correct: "He studies hard to pass the exam." },
+        { prompt: "Complete the sentence: I went to the library ___.", options: ["studying", "study", "to study", "studied"], correct: "to study" },
+        { prompt: "Complete the sentence: She opened the window ___ some fresh air.", options: ["getting", "to get", "got", "get"], correct: "to get" },
+        { prompt: "Which sentence correctly uses an infinitive after an adjective?", options: ["I am ready to leave.", "I am ready leaving.", "I am ready leave.", "I am ready to leaving."], correct: "I am ready to leave." },
+        { prompt: "Which sentence is grammatically correct?", options: ["He was surprised to see me.", "He was surprised seeing me.", "He was surprised see me.", "He was surprised to seeing me."], correct: "He was surprised to see me." },
+        { prompt: "In \"She is eager to learn,\" the phrase to learn is:", options: ["a gerund", "a to-infinitive", "a finite verb", "a preposition"], correct: "a to-infinitive" },
+        { prompt: "Which sentence has correct parallel structure?", options: ["She enjoys reading, swimming, and to run.", "She enjoys reading, swimming, and running.", "She enjoys to read, swimming, and running.", "She enjoys reading, to swim, and running."], correct: "She enjoys reading, swimming, and running." },
+        { prompt: "Which sentence is parallel?", options: ["I like cooking, to travel, and reading.", "I like cooking, traveling, and reading.", "I like to cook, traveling, and reading.", "I like cooking, travel, and to read."], correct: "I like cooking, traveling, and reading." },
+        { prompt: "Which sentence correctly uses parallel to-infinitive?", options: ["She wants to study, to travel, and to work abroad.", "She wants studying, traveling, and to work abroad.", "She wants to study, traveling, and working abroad.", "She wants studying, to travel, and working abroad."], correct: "She wants to study, to travel, and to work abroad." },
+        { prompt: "Which sentence has a parallel structure?", options: ["My hobbies are reading, to cook, and hiking.", "My hobbies are to read, cooking, and hiking.", "My hobbies are reading, cooking, and hiking.", "My hobbies are read, cooking, and to hike."], correct: "My hobbies are reading, cooking, and hiking." },
+        { prompt: "Which sentence correctly uses parallel gerunds?", options: ["He enjoys hiking, swimming, and cycling.", "He enjoys hiking, to swim, and cycling.", "He enjoys to hike, swimming, and cycling.", "He enjoys hiking, swimming, and to cycle."], correct: "He enjoys hiking, swimming, and cycling." },
+        { prompt: "Which sentence correctly uses parallel infinitives?", options: ["They plan to travel, studying, and working.", "They plan traveling, to study, and working.", "They plan to travel, to study, and to work.", "They plan travel, study, and to work."], correct: "They plan to travel, to study, and to work." },
+        { prompt: "Which sentence needs correction because of faulty parallelism?", options: ["She likes reading and writing.", "She likes to read and to write.", "She likes reading and to write.", "She likes to read and write."], correct: "She likes reading and to write." },
+        { prompt: "Which is the best correction? He enjoys hiking, to swim, and cycling.", options: ["He enjoys hiking, swimming, and cycling.", "He enjoys to hike, swimming, and cycling.", "He enjoys hiking, to swim, and to cycle.", "He enjoys hike, swim, and cycle."], correct: "He enjoys hiking, swimming, and cycling." },
+        { prompt: "Choose the correct sentence: ___ English every day helps improve fluency.", options: ["To practicing", "Practice", "Practicing", "Practiced"], correct: "Practicing" },
+        { prompt: "Choose the best answer: She decided ___ abroad because she enjoys ___ new cultures.", options: ["studying / to experience", "to study / experiencing", "studying / experiencing", "to studying / experience"], correct: "to study / experiencing" }
+    ];
+
+    // Shuffle array function (Fisher-Yates)
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    let shuffledQuestions = [];
+    let userAnswers = new Array(100).fill(null);
+    let warningCount = 0;
+    let isSubmitted = false;
+
+    const questionsContainer = document.getElementById('questionsContainer');
+    const submitBtn = document.getElementById('submitQuizBtn');
+    const modal = document.getElementById('resultModal');
+    const modalContent = document.getElementById('modalContent');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const warningCounterSpan = document.getElementById('warningCounterSpan');
+    const progressDisplay = document.getElementById('progressDisplay');
+
+    function updateWarningUI() {
+        warningCounterSpan.innerHTML = `⚠️ Warning ${warningCount} / 2`;
+        if (warningCount >= 2) {
+            warningCounterSpan.style.color = "#ffaa66";
+            warningCounterSpan.style.fontWeight = "bold";
+        }
+        if (warningCount >= 3) {
+            warningCounterSpan.innerHTML = `⛔ Force submission triggered`;
+        }
+    }
+
+    function updateProgress() {
+        const answered = userAnswers.filter(a => a !== null).length;
+        progressDisplay.textContent = `${answered} / 100`;
+    }
+
+    function disableQuizInputs() {
+        const allRadios = document.querySelectorAll('input[type="radio"]');
+        allRadios.forEach(radio => radio.disabled = true);
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.6';
+        submitBtn.style.cursor = 'default';
+    }
+
+    function forceAutoSubmit(reason) {
+        if (isSubmitted) return;
+        alert(`⚠️ ${reason} The quiz will be submitted now.`);
+        submitQuiz(true);
+    }
+
+    function renderQuestions() {
+        questionsContainer.innerHTML = '';
+        shuffledQuestions.forEach((q, idx) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            const selectedVal = userAnswers[idx] || '';
+            card.innerHTML = `
+                <div class="question-text">
+                    <span class="q-num">Q${idx+1}</span>
+                    <span class="target-text">${q.prompt}</span>
+                </div>
+                <div class="options" data-qidx="${idx}">
+                    ${q.shuffledOptions.map(opt => `
+                        <div class="option-radio ${selectedVal === opt ? 'selected' : ''}" data-opt="${opt}">
+                            <input type="radio" name="q${idx}" value="${opt}" id="q${idx}_${opt.replace(/\s/g, '_').replace(/\//g, '_').replace(/"/g, '')}" ${selectedVal === opt ? 'checked' : ''}>
+                            <label for="q${idx}_${opt.replace(/\s/g, '_').replace(/\//g, '_').replace(/"/g, '')}">${opt}</label>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            questionsContainer.appendChild(card);
+            const radioInputs = card.querySelectorAll('input[type="radio"]');
+            radioInputs.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    const chosenValue = e.target.value;
+                    userAnswers[idx] = chosenValue;
+                    const optsDivs = card.querySelectorAll('.option-radio');
+                    optsDivs.forEach(div => {
+                        const optVal = div.getAttribute('data-opt');
+                        if (optVal === chosenValue) div.classList.add('selected');
+                        else div.classList.remove('selected');
+                    });
+                    updateProgress();
+                });
+            });
+        });
+        updateProgress();
+    }
+
+    function computeScoreAndSummary() {
+        let correctCount = 0;
+        const details = [];
+        for (let i = 0; i < shuffledQuestions.length; i++) {
+            const q = shuffledQuestions[i];
+            const userChoice = userAnswers[i];
+            const isCorrect = (userChoice === q.correct);
+            if (isCorrect) correctCount++;
+            details.push({
+                idx: i+1,
+                prompt: q.prompt,
+                userAnswer: userChoice || '(not answered)',
+                correctAnswer: q.correct,
+                isCorrect: isCorrect
+            });
+        }
+        const totalScore = correctCount;
+        return { correctCount, totalScore, details };
+    }
+
+    function submitQuiz(isForced = false) {
+        if (isSubmitted) return;
+        isSubmitted = true;
+        const { correctCount, totalScore, details } = computeScoreAndSummary();
+        let summaryHtml = `<div style="margin-bottom: 12px;"><strong>✅ Score: ${totalScore} / 100</strong> (${correctCount} correct answers out of 100)</div>`;
+        summaryHtml += `<div style="font-size:0.85rem; margin-bottom: 16px;">📊 ${correctCount} / 100 correct answers</div>`;
+        summaryHtml += `<div style="max-height: 400px; overflow-y: auto;">`;
+        details.forEach(d => {
+            const statusIcon = d.isCorrect ? '✔️' : '❌';
+            const userShow = d.userAnswer || '—';
+            const colorClass = d.isCorrect ? 'correct-ans' : 'wrong-ans';
+            summaryHtml += `
+                <div class="summary-item">
+                    <strong>${d.idx}.</strong> ${d.prompt}<br>
+                    <span>Your: <span class="${colorClass}">${userShow}</span></span> &nbsp; | &nbsp;
+                    Correct: <strong>${d.correctAnswer}</strong> ${statusIcon}
+                </div>
+            `;
+        });
+        summaryHtml += `</div><p style="margin-top:12px;">*Scoring: each correct = 1 point. Max 100.</p>`;
+        modalContent.innerHTML = summaryHtml;
+        modal.classList.add('active');
+        disableQuizInputs();
+    }
+
+    function initQuiz() {
+        // Shuffle questions first
+        const shuffledRaw = shuffleArray([...RAW_QUESTIONS]);
+        // For each question, shuffle its options
+        shuffledQuestions = shuffledRaw.map(q => {
+            const shuffled = shuffleArray([...q.options]);
+            return {
+                prompt: q.prompt,
+                shuffledOptions: shuffled,
+                correct: q.correct
+            };
+        });
+        userAnswers.fill(null);
+        warningCount = 0;
+        isSubmitted = false;
+        updateWarningUI();
+        renderQuestions();
+    }
+
+    // Anti-cheat handlers
+    function handleVisibilityChange() {
+        if (isSubmitted) return;
+        if (document.hidden) {
+            warningCount++;
+            updateWarningUI();
+            if (warningCount <= 2) alert(`⚠️ WARNING ${warningCount}/2: Do not switch tabs/windows. Further violation forces submission.`);
+            if (warningCount >= 3) forceAutoSubmit("Tab switching violation.");
+        }
+    }
+
+    let splitGiven = false;
+    function detectSplitScreen() {
+        if (isSubmitted) return;
+        const screenW = window.screen.width;
+        const winW = window.outerWidth;
+        if (winW < screenW * 0.75 && winW > 100 && !splitGiven) {
+            splitGiven = true;
+            warningCount++;
+            updateWarningUI();
+            alert("⚠️ Split screen detected! Warning added.");
+            if (warningCount >= 3) forceAutoSubmit("Split screen limit.");
+        }
+    }
+
+    function antiScreenshot(e) {
+        if (isSubmitted) return;
+        if (e.key === 'PrintScreen' || (e.ctrlKey && e.key === 'p') || (e.ctrlKey && e.shiftKey && (e.key === 'S' || e.key === 's'))) {
+            e.preventDefault();
+            warningCount++;
+            updateWarningUI();
+            alert(`⚠️ Screenshot attempt! Warning ${warningCount}/2`);
+            if (warningCount >= 3) forceAutoSubmit("Screenshot violation.");
+            return false;
+        }
+        if (e.type === 'contextmenu') {
+            e.preventDefault();
+            warningCount++;
+            updateWarningUI();
+            alert("Right-click disabled. Warning added.");
+            if (warningCount >= 3) forceAutoSubmit("Context menu abuse.");
+            return false;
+        }
+    }
+
+    function preventDevTools(e) {
+        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'U')) {
+            e.preventDefault();
+            warningCount++;
+            updateWarningUI();
+            alert("DevTools blocked. Warning " + warningCount + "/2");
+            if (warningCount >= 3) forceAutoSubmit("DevTools usage.");
+            return false;
+        }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('resize', detectSplitScreen);
+    window.addEventListener('keydown', antiScreenshot);
+    window.addEventListener('contextmenu', antiScreenshot);
+    document.addEventListener('keydown', preventDevTools);
+    document.addEventListener('copy', (e) => { e.preventDefault(); warningCount++; updateWarningUI(); alert("Copy disabled."); if(warningCount>=3) forceAutoSubmit("Copy attempt."); });
+    document.addEventListener('cut', (e) => { e.preventDefault(); warningCount++; updateWarningUI(); if(warningCount>=3) forceAutoSubmit(); });
+    document.addEventListener('paste', (e) => { e.preventDefault(); warningCount++; updateWarningUI(); if(warningCount>=3) forceAutoSubmit(); });
+
+    submitBtn.addEventListener('click', () => {
+        if (isSubmitted) return;
+        const confirmSubmit = confirm("Are you sure you want to submit your answers? You cannot change after submission.");
+        if (confirmSubmit) submitQuiz(false);
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+
+    initQuiz();
+</script>
+</body>
+</html>
